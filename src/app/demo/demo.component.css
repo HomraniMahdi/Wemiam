@@ -1,0 +1,125 @@
+mat-drawer {
+    width: 350px;
+  }
+  mat-drawer-container {
+    height: calc(100% - 64px);
+  }
+  .preview-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 8px;
+  }
+  .preview-layout .preview-item {
+    padding: 8px;
+    cursor: pointer;
+  }
+  .preview-layout .preview-item:hover {
+    background: white;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+  .preview-layout .preview-title {
+    margin-top: 8px;
+    text-align: center;
+  }
+  .status-bar {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    background: #ececec;
+    min-height: 79px;
+    width: 100%;
+  }
+  .status-bar .status-bar-item td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .status-bar .status-bar-item span {
+    margin-right: 15px;
+  }
+  .new-text mat-radio-group {
+    padding-left: 12px;
+  }
+  .new-text mat-radio-group mat-radio-button {
+    margin-right: 16px;
+  }
+  .export-btns {
+    padding: 24px;
+  }
+  .export-btns button {
+    width: 100%;
+  }
+  .export-btns button:first-of-type {
+    margin-bottom: 24px;
+  }
+  mat-toolbar-row {
+    justify-content: space-between;
+  }
+  .example-container {
+    width: 1000px;
+    height: 500px;
+    margin: 100px;
+    border: 1px solid #555;
+  }
+  .main-title {
+    margin-top: 10px;
+  }
+  .images-item {
+    width: 48%;
+    cursor: pointer;
+    -webkit-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    padding: 3px;
+    max-width: 120px;
+  }
+  .images-item:hover {
+    opacity: 0.7;
+  }
+  .images-item-upload {
+    width: 80%;
+    cursor: pointer;
+    padding-bottom: 10px;
+    -webkit-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+  }
+  .images-item-upload:hover {
+    opacity: 0.7;
+  }
+  .custom-item {
+    border-bottom: 2px solid #f3f3f3;
+  }
+  .custom-item .custom-item-title {
+    color: #666666;
+    font-weight: 600;
+  }
+  .custom-item .custom-item-body {
+    padding: 10px 0;
+  }
+  .max-height {
+    overflow: auto;
+    max-height: 300px;
+  }
+  .example-box {
+    width: 200px;
+    height: 200px;
+    border: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: move;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+                0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+  
+  .example-box:active {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
