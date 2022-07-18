@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { AppService } from '../app.service';
+import { AppService } from '../Service/app.service';
 import { fabric } from 'fabric';
 import * as uuid from 'uuid';
 import { createFurniture, RL_PREVIEW_HEIGHT, RL_PREVIEW_WIDTH } from '../helpers';

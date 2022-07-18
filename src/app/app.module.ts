@@ -1,3 +1,4 @@
+import { AssetPipe } from './pipes/asset.pipe';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -17,11 +18,14 @@ import { FabricjsEditorComponent } from './lib/lib.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
 import { MaterialExampleModule } from './material.module';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DemoComponent,
+    SafePipe,
+    AssetPipe,
     PreviewFurnitureComponent,
     FabricjsEditorComponent
   ],

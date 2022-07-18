@@ -4,6 +4,7 @@
       <img class="img-fluid" src="assets/img/WeMiamLogo.jpg"width="50" height="auto" alt="Logo guido">
     </mat-toolbar-row>
   </mat-toolbar>
+
   <br>
 
   <mat-drawer-container hasBackdrop="false">
@@ -36,8 +37,19 @@
                 <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/zubat.svg">
             </div>
           </mat-list>
+          
         </mat-expansion-panel>
-   
+        <div class="card">
+            <div class="card-header">Walls</div>
+            <div class="card-body text-center max-height">
+                <div class="btn-group btn-group-vertical" role="group" aria-label="...">
+                    <button type="button" class="btn btn-primary" (click)="addFigure('rectangle');">Rectangle</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigure('square');">Square</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigure('triangle');">Triangle</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigure('circle');">Circle</button>
+                </div>
+            </div>
+        </div>
       </mat-accordion>
     </mat-drawer>
   
@@ -46,6 +58,62 @@
         <div class="col-xl-6">
             <app-lib #canvas></app-lib>
             </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <br/>
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-primary btn-sm" (click)="rasterizeJSON()">
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Export to json</button>
+                                <button  data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-danger" (click)="confirmClear();">
+                                    <i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
+                                        <div class="card">
+                                            <div class="card-header">Options</div>
+                                            <div class="card-body text-center">
+                                                <div class="btn-group" role="group" aria-label="...">
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!canvas.selected"
+                                                        (click)="removeSelected();">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
+                                                        (click)="sendToBack();">
+                                                        <i class="fa fa-level-down" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
+                                                        (click)="bringToFront();">
+                                                        <i class="fa fa-level-up" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected || canvas.selected.type == 'group'"
+                                                        (click)="clone();">
+                                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
+                                                        (click)="cleanSelect()">
+                                                        <i class="fa fa-remove" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="card-body">
+                            <pre>{{canvas.json}}</pre>
+                        </div>
+                    </div>
+                </div>
+           
     </mat-drawer-content>
   </mat-drawer-container>
-  
+
+  <ng-container *ngIf="visible.floorsToolbar">
+
+    <button *ngFor="let map of floorMaps; let idx = index" mat-fab color="secondary"
+            [style]="'position: absolute; bottom: ' + (90 + idx * 50) + 'px; left: 20px;' | safe:'style'"
+            [style.border]="currentFloorMap?.id === map.id ? '1px solid #0073b2' : 'none'"
+            matTooltip="Load map of floor {{map.id}}"
+            matTooltipPosition="right"
+          >
+        <!--img [attr.src]="map.icon | asset | async" alt="Floor {{map.id}}"!-->
+    </button>
+
+</ng-container>

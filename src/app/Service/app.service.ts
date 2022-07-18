@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -116,4 +116,50 @@ export class AppService {
     this.zoom -= 10;
     this.performOperation.next('ZOOM');
   }
+  
+  
+    /**
+     * Replaces current editor content with new map.
+     * @param map A map to load into editor.
+     */
+    /* public loadMap(map: MapConfig): Observable<any> {
+      return new Observable(o => {
+          this.clear();
+          this.currentFloorMap = map;
+          const data = this.assets.getOther(map.backgroundImage);
+          this.setBackgroundImage(data)
+              .then(() => {
+                  const tmp = this.activeObject;
+                  const tmpRotation = this.rotation;
+                  const snapGrid = this.snapToGrid;
+                  this.snapToGrid = false;
+                  map.items.forEach(item => {
+                      this.setActiveObject(item.type);
+                      this.onEditorMouseMove(<MouseEvent>{
+                          offsetX: item.x,
+                          offsetY: item.y
+                      });
+                      this.rotation = item.rotation;
+                      this.updateCursorRotation();
+                      this.drawObject(item.x, item.y);
+                  });
+                  this.onEditorMouseLeave();
+                  this.rotation = tmpRotation;
+                  this.setActiveObject(tmp.type);
+                  this.snapToGrid = snapGrid;
+                  o.next();
+                  o.complete();
+              });
+      });
+  }*/
+      /**
+     * Clear whole map editor, including graphics and interactive elements.
+     */
+       /*public clear(): void {
+        this.layers.objects.forEach(x => {
+            this.removeNativeChildOfObject(x);
+        });
+        this.layers.clear();
+        this.clean();
+    }*/
 }

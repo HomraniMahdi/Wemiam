@@ -30,8 +30,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
   public textString: string;
   public url: string | ArrayBuffer = '';
   public size: any = {
-    width: 1700,
-    height: 990
+    width: 1350,
+    height: 750
   };
 
   public json: any;
@@ -204,23 +204,23 @@ export class FabricjsEditorComponent implements AfterViewInit {
       case 'rectangle':
         add = new fabric.Rect({
           width: 200, height: 100, left: 10, top: 10, angle: 0,
-          fill: '#3f51b5'
+          fill: '#D3D3D3'
         });
         break;
       case 'square':
         add = new fabric.Rect({
           width: 100, height: 100, left: 10, top: 10, angle: 0,
-          fill: '#4caf50'
+          fill: '#D3D3D3'
         });
         break;
       case 'triangle':
         add = new fabric.Triangle({
-          width: 100, height: 100, left: 10, top: 10, fill: '#2196f3'
+          width: 100, height: 100, left: 10, top: 10, fill: '#D3D3D3'
         });
         break;
       case 'circle':
         add = new fabric.Circle({
-          radius: 50, left: 10, top: 10, fill: '#ff5722'
+          radius: 50, left: 10, top: 10, fill: '#D3D3D3'
         });
         break;
     }
@@ -247,15 +247,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
     }
   }
 
-  extend(obj: fabric.Object, id: number) {
+  extend(obj:any, id:any) {
     obj.toObject = ((toObject) => {
-      return () => {
+      return function(this:any) {
         return fabric.util.object.extend(toObject.call(this), {
           id
         });
       };
     })(obj.toObject);
   }
+
 
   setCanvasImage() {
     const self = this;
