@@ -12,7 +12,7 @@ import { MapConfig } from '../models/configuration';
   styleUrls: ['./demo.component.css']
 })
 export class DemoComponent implements OnInit {
-
+  public resultImage: any;
   public visible = {
     objectsToolbar: true,
     adminToolbar: true,
@@ -25,7 +25,7 @@ export class DemoComponent implements OnInit {
   public currentFloorMap: MapConfig;
   public floorMapsDict: { [id: number]: MapConfig } = {};
 
-  @ViewChild('canvas', { static: false }) canvas: FabricjsEditorComponent;
+  @ViewChild('canvas', { static: false }) canvas: FabricjsEditorComponent ;
   furnishings = FURNISHINGS;
   defaultChairIndex = 0;
   constructor(public app: AppService) { }
@@ -76,27 +76,11 @@ export class DemoComponent implements OnInit {
   public cleanSelect() {
     this.canvas.cleanSelect();
   }
-/*  public onLoadMapClick(floor: number): void {
-    if (floor !== this.currentFloorMap.id) {
-        this.saveCurrentFloorMapConfig();
-
-        // open new
-        this.currentFloorMap = this.floorMapsDict[floor];
-        this.app.loadMap(this.currentFloorMap)
-            .subscribe(() => {
-            });
-    }
-    this.editorSettings.currentFloorMap = floor;
-}
-  private saveCurrentFloorMapConfig(): void {
-  // save current map
-  const snapMap = this.service.snapshotMap();
-
-  // currentFloorMap contains current floor reference from floorMaps
-  this.currentFloorMap.items = snapMap.items;
-  this.currentFloorMap.renderedImage = snapMap.renderedImage;
-  this.currentFloorMap.backgroundImage = snapMap.backgroundImage;
-  this.currentFloorMap.mapWidth = snapMap.mapWidth;
-  this.currentFloorMap.mapHeight= snapMap.mapHeight;
-}*/
+  public saveImage() {
+    this.resultImage = this.canvas.rasterize
+  }
+  
+  public changeSize() {
+    this.canvas.changeSize();
+  }
 }

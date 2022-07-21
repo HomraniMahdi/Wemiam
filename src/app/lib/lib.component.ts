@@ -8,12 +8,13 @@ import { fabric } from 'fabric';
   styleUrls: ['./lib.component.css']
 })
 export class FabricjsEditorComponent implements AfterViewInit {
+  
   @ViewChild('htmlCanvas') htmlCanvas: ElementRef;
 
   private canvas: fabric.Canvas;
   public props = {
     canvasFill: '#ffffff',
-    canvasImage: '',
+    canvasImage: "",
     id: null,
     opacity: null,
     fill: null,
@@ -26,7 +27,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     fontFamily: null,
     TextDecoration: ''
   };
-
+  public resultImage: any;
   public textString: string;
   public url: string | ArrayBuffer = '';
   public size: any = {
@@ -105,11 +106,33 @@ export class FabricjsEditorComponent implements AfterViewInit {
       const canvasElement: any = document.getElementById('canvas');
     });
 
+    
   }
 
 
+  
   /*------------------------Block elements------------------------*/
+  createCanvas() {
+    var that = this;
 
+    this.canvas = new fabric.Canvas("canvas", {
+      preserveObjectStacking: true,
+      selection: true
+    });
+
+    this.canvas.setBackgroundImage(
+      "https://www.naturespicsonline.com/system/carousel_image/file/193/0.jpg",
+      function() {
+        that.canvas.renderAll();
+      },
+      {
+        height: this.canvas.getHeight(),
+        width: this.canvas.getWidth(),
+        crossOrigin: "anonymous",
+        // backgroundImageStretch: true
+      }
+    );
+  }
   // Block "Size"
 
   changeSize() {
@@ -147,12 +170,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
     fabric.loadSVGFromURL(el.src, (objects, options) => {
       const image = fabric.util.groupSVGElements(objects, options);
       image.set({
+        width : 100,
+        height : 100,
         left: 10,
         top: 10,
         angle: 0,
         padding: 10,
         cornerSize: 10,
         hasRotatingPoint: true,
+
+        hasControls : false
       });
       this.extend(image, this.randomId());
       this.canvas.add(image);
@@ -203,7 +230,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     switch (figure) {
       case 'rectangle':
         add = new fabric.Rect({
-          width: 200, height: 100, left: 10, top: 10, angle: 0,
+          width: 1000, height: 20, left: 10, top: 10, angle: 0, hasControls : false,
           fill: '#D3D3D3'
         });
         break;
@@ -383,6 +410,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           break;
       }
       if (clone) {
+
         clone.set({ left: 10, top: 10 });
         this.canvas.add(clone);
         this.selectItemAfterAdded(clone);

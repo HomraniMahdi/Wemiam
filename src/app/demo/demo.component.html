@@ -1,7 +1,7 @@
 <mat-toolbar color="#FFF8E1">
     <mat-toolbar-row>
       <!-- <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button> -->
-      <img class="img-fluid" src="assets/img/WeMiamLogo.jpg"width="50" height="auto" alt="Logo guido">
+      <img class="img-fluid" src="assets/img/WeMiamLogo.jpg"width="50" height="auto" alt="Logo Wemiam">
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -10,9 +10,47 @@
   <mat-drawer-container hasBackdrop="false">
     <mat-drawer #drawer mode="side" opened>
       <mat-accordion class="rl-object-options">
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <img class="img-fluid" src="assets/img/settings.png"width="40"  height="10" style="margin-bottom: 15px ; margin-top: 15px;" alt="Setting">
+                  <h2 style="margin-top:20px ; margin-left:20px">Setting</h2>
+            </mat-expansion-panel-header>
+            <mat-list>
+              <mat-divider></mat-divider>
+              <div class="card">
+                <div class="card-header">Size</div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" class="form-control" [(ngModel)]="canvas.size.width" (keyup)="changeSize()">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          Width
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" [(ngModel)]="canvas.size.height" (keyup)="changeSize()">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          Height
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-list>
+          </mat-expansion-panel>
+              <br>
+
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <img class="img-fluid" src="assets/img/tableNav.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo guido">
+            <img class="img-fluid" src="assets/img/tableNav.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo Tables">
                 <h2 style="margin-top:20px ; margin-left:20px">Tables</h2>
           </mat-expansion-panel-header>
           <mat-list>
@@ -37,10 +75,15 @@
                 <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/zubat.svg">
             </div>
           </mat-list>
-          
         </mat-expansion-panel>
-        <div class="card">
-            <div class="card-header">Walls</div>
+            <br>
+        <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <img class="img-fluid" src="assets/img/Walls.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo Walls">
+                        <h2 style="margin-top:20px ; margin-left:20px">walls</h2>
+                  </mat-expansion-panel-header>
+            <mat-divider></mat-divider>
+
             <div class="card-body text-center max-height">
                 <div class="btn-group btn-group-vertical" role="group" aria-label="...">
                     <button type="button" class="btn btn-primary" (click)="addFigure('rectangle');">Rectangle</button>
@@ -49,14 +92,16 @@
                     <button type="button" class="btn btn-primary" (click)="addFigure('circle');">Circle</button>
                 </div>
             </div>
-        </div>
+       
+    </mat-expansion-panel>
+
       </mat-accordion>
     </mat-drawer>
   
     <mat-drawer-content>
-  
+
         <div class="col-xl-6">
-            <app-lib #canvas></app-lib>
+            <app-lib #canvas ></app-lib>
             </div>
             <div class="row">
                 <div class="col-xl-12">
@@ -75,6 +120,7 @@
                                                         (click)="removeSelected();">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
+
                                                     <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
                                                         (click)="sendToBack();">
                                                         <i class="fa fa-level-down" aria-hidden="true"></i>
@@ -101,19 +147,6 @@
                         </div>
                     </div>
                 </div>
-           
+                
     </mat-drawer-content>
   </mat-drawer-container>
-
-  <ng-container *ngIf="visible.floorsToolbar">
-
-    <button *ngFor="let map of floorMaps; let idx = index" mat-fab color="secondary"
-            [style]="'position: absolute; bottom: ' + (90 + idx * 50) + 'px; left: 20px;' | safe:'style'"
-            [style.border]="currentFloorMap?.id === map.id ? '1px solid #0073b2' : 'none'"
-            matTooltip="Load map of floor {{map.id}}"
-            matTooltipPosition="right"
-          >
-        <!--img [attr.src]="map.icon | asset | async" alt="Floor {{map.id}}"!-->
-    </button>
-
-</ng-container>
