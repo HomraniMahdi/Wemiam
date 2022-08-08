@@ -25,14 +25,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     id: null,
     opacity: null,
     fill: null,
-    fontSize: null,
-    lineHeight: null,
-    charSpacing: null,
-    fontWeight: null,
-    fontStyle: null,
-    textAlign: null,
-    fontFamily: null,
-    TextDecoration: ''
   };
   public resultImage: any;
   public textString: string;
@@ -41,11 +33,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
     width: 1350,
     height: 750
   };
+  public sizeWall: any = {
+    width: 100,
+    height: 20
+  };
 
   public json: any;
-  private globalEditor = false;
-  public textEditor = false;
-  private imageEditor = false;
   public figureEditor = false;
   public selected: any;
 
@@ -58,16 +51,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       hoverCursor: 'pointer',
 
     });
-   /* this.canvas.on('mouse:wheel', function(opt) {
-      var delta = opt.e.deltaY;
-      var zoom = canvas.getZoom();
-      zoom *= 0.999 ** delta;
-      if (zoom > 20) zoom = 20;
-      if (zoom < 0.01) zoom = 0.01;
-      canvas.setZoom(zoom);
-      opt.e.preventDefault();
-      opt.e.stopPropagation();
-    })*/
+
 
     this.canvas.on({
       'object:moving': (e) => { },
@@ -107,7 +91,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     
   }
 
-  
   /*------------------------Block elements------------------------*/
   createCanvas() {
     var that = this;
@@ -118,7 +101,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     });
   }
   
-  /*------------------------Block Size------------------------*/
+  /*------------------------Block changeSize------------------------*/
   changeSize() {
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
@@ -137,9 +120,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
         angle: 0,
         padding: 10,
         cornerSize: 10,
-        hasRotatingPoint: true,
-
-        hasControls : false
+        rotatingPointOffset:0,
+        hasControls : true
       });
       this.extend(image, this.randomId());
       this.canvas.add(image);
@@ -147,50 +129,30 @@ export class FabricjsEditorComponent implements AfterViewInit {
     });
   }
   
-  /*------------------------Block Upload Image------------------------*/
-  addImageOnCanvas(url: string) {
-    if (url) {
-      fabric.Image.fromURL(url, (image) => {
-        image.set({
-          left: 10,
-          top: 10,
-          angle: 0,
-          padding: 10,
-          cornerSize: 10,
-          hasRotatingPoint: true
-        });
-        image.scaleToWidth(200);
-        image.scaleToHeight(200);
-        this.extend(image, this.randomId());
-        this.canvas.add(image);
-        this.selectItemAfterAdded(image);
-      });
-    }
-  }
  /*------------------------Block Add figure------------------------*/
   addFigure(figure: any) {
     let add: any;
     switch (figure) {
       case 'rectangle':
         add = new fabric.Rect({
-          width: 1000, height: 20, left: 10, top: 10, angle: 0, hasControls : false,
+          width: 1000, height: 20, left: 10, top: 10, angle: 0,rotatingPointOffset:0,
           fill: '#D3D3D3'
         });
         break;
       case 'square':
         add = new fabric.Rect({
-          width: 100, height: 100, left: 10, top: 10, angle: 0,
+          width: 100, height: 100, left: 10, top: 10, angle: 0,rotatingPointOffset:0,
           fill: '#D3D3D3'
         });
         break;
       case 'triangle':
         add = new fabric.Triangle({
-          width: 100, height: 100, left: 10, top: 10, fill: '#D3D3D3'
+          width: 100, height: 100, left: 10, top: 10,rotatingPointOffset:0, fill: '#D3D3D3'
         });
         break;
       case 'circle':
         add = new fabric.Circle({
-          radius: 50, left: 10, top: 10, fill: '#D3D3D3'
+          radius: 50, left: 10, top: 10,rotatingPointOffset:0, fill: '#D3D3D3'
         });
         break;
     }
@@ -198,6 +160,18 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.add(add);
     this.selectItemAfterAdded(add);
   }
+      /*------------------------Block changeWallSize------------------------*/
+      changeWallSize(figure: any) {
+        switch (figure) {
+          case 'rectangle':
+          var  add = new fabric.Rect({
+              width: 1000, height: 20, left: 10, top: 10, angle: 0, hasControls : false,hasBorders:false,
+              fill: '#D3D3D3'
+            });
+            add.scaleToWidth(this.sizeWall.width)
+            add.scaleToHeight(this.sizeWall.height);
+    }
+    }
  /*------------------------Block cleanSelect------------------------*/
   cleanSelect() {
     this.canvas.discardActiveObject().renderAll();
