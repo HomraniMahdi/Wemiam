@@ -1,0 +1,151 @@
+<mat-toolbar color="#FFF8E1">
+    <mat-toolbar-row>
+      <!-- <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button> -->
+      <img class="img-fluid" src="assets/img/WeMiamLogo.jpg"width="50" height="auto" alt="Logo Wemiam">
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <br>
+  <mat-drawer-container hasBackdrop="false">
+    <mat-drawer #drawer mode="side" opened>
+      <mat-accordion class="rl-object-options">
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <img class="img-fluid" src="assets/img/settings.png"width="40"  height="10" style="margin-bottom: 15px ; margin-top: 15px;" alt="Setting">
+                  <h2 style="margin-top:20px ; margin-left:20px">Setting</h2>
+            </mat-expansion-panel-header>
+            <mat-list>
+              <mat-divider></mat-divider>
+              <div class="card">
+                <div class="card-header">Size</div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" class="form-control" [(ngModel)]="canvas.size.width" (keyup)="changeSize()">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          Width
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" [(ngModel)]="canvas.size.height" (keyup)="changeSize()">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          Height
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-list>
+          </mat-expansion-panel>
+              <br>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <img class="img-fluid" src="assets/img/tableNav.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo Tables">
+                <h2 style="margin-top:20px ; margin-left:20px">Tables</h2>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-divider></mat-divider>
+            <div class="card-body max-height">
+                <img class="example-box" class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/table.svg" cdkDrag>
+                <img class="example-box"class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/dining-table.svg"cdkDrag>
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/bullbasaur.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/charmander.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/bellsprout.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/caterpie.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/dratini.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/eevee.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/jigglypuff.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/mankey.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/meowth.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/pidgey.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/psyduck.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/rattata.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/abra.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/snorlax.svg">
+                <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/zubat.svg">
+            </div>
+          </mat-list>
+        </mat-expansion-panel>
+            <br>
+        <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <img class="img-fluid" src="assets/img/Walls.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo Walls">
+                        <h2 style="margin-top:20px ; margin-left:20px">walls</h2>
+                  </mat-expansion-panel-header>
+            <mat-divider></mat-divider>
+
+            <div class="card-body text-center max-height">
+                <div class="btn-group btn-group-vertical" role="group" aria-label="...">
+                    <button type="button" class="btn btn-primary" (click)="addFigure('rectangle');">Rectangle</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigure('square');">Square</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigure('triangle');">Triangle</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigure('circle');">Circle</button>
+                </div>
+            </div>
+       
+    </mat-expansion-panel>
+
+      </mat-accordion>
+    </mat-drawer>
+  
+    <mat-drawer-content>
+
+        <div class="col-xl-6">
+            <app-lib #canvas ></app-lib>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <br/>
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-primary btn-sm" (click)="rasterizeJSON()">
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Export to json</button>
+                                <button  data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-danger" (click)="confirmClear();">
+                                    <i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
+                                        <div class="card">
+                                            <div class="card-header">Options</div>
+                                            <div class="card-body text-center">
+                                                <div class="btn-group" role="group" aria-label="...">
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!canvas.selected"
+                                                        (click)="removeSelected();">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
+                                                        (click)="sendToBack();">
+                                                        <i class="fa fa-level-down" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
+                                                        (click)="bringToFront();">
+                                                        <i class="fa fa-level-up" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected || canvas.selected.type == 'group'"
+                                                        (click)="clone();">
+                                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
+                                                        (click)="cleanSelect()">
+                                                        <i class="fa fa-remove" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="card-body">
+                            <pre>{{canvas.json}}</pre>
+                        </div>
+                    </div>
+                </div>
+                
+    </mat-drawer-content>
+  </mat-drawer-container>
