@@ -157,7 +157,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           mb: false, // midle bottom
           ml: false, // middle left
           mr: false, // I think you get it
-          tl:true,
+          tl:false,
           bl:false,
           tr:false,
           br:false,
