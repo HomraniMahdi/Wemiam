@@ -44,8 +44,12 @@ export class DemoComponent implements OnInit {
     this.canvas.saveCanvasToJSON();
   }
   
-  public getImgPolaroid(event:any) {
-    this.canvas.getImgPolaroid(event);
+  public getImgPolaroidDecoration(event:any) {
+    this.canvas.getImgPolaroidDecoration(event);
+  }
+
+  public getImgPolaroidTable(event:any) {
+    this.canvas.getImgPolaroidTable(event);
   }
 
   public rasterizeJSON() {

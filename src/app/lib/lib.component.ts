@@ -65,13 +65,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
         selectedObject.cornerColor = 'rgba(255, 87, 34, 0.7)';
         if (selectedObject.type !== 'group' && selectedObject) {
           this.getId();
-          this.getOpacity();
           switch (selectedObject.type) {
             case 'rect':
             case 'circle':
             case 'triangle':
               this.figureEditor = true;
-              this.getFill();
               break;
           }
         }
@@ -88,7 +86,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.on('mouse:down', (e) => {
       const canvasElement: any = document.getElementById('canvas');
     });
-    
+
   }
 
   /*------------------------Block elements------------------------*/
@@ -107,35 +105,75 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.setHeight(this.size.height);
   }
 
-  /*------------------------Block Add images------------------------*/
-  getImgPolaroid(event: any) {
+  /*------------------------Block Add Decoration------------------------*/
+  getImgPolaroidDecoration(event: any) {
     const el = event.target;
     fabric.loadSVGFromURL(el.src, (objects, options) => {
       const image = fabric.util.groupSVGElements(objects, options);
       image.set({
-        width : 100,
-        height : 100,
+        width : 50,
+        height : 50,
         left: 10,
         top: 10,
         angle: 0,
         padding: 10,
         cornerSize: 10,
         rotatingPointOffset:0,
-        hasControls : true
       });
       this.extend(image, this.randomId());
-      this.canvas.add(image);
+      this.canvas.add(image.setControlsVisibility({
+        mt: false, // middle top disable
+        mb: false, // midle bottom
+        ml: false, // middle left
+        mr: false, // I think you get it
+        tl:true,
+        bl:false,
+        tr:false,
+        br:false,
+        mtr:false,
+      }));
       this.selectItemAfterAdded(image);
     });
   }
   
+    /*------------------------Block Add Table------------------------*/
+    getImgPolaroidTable(event: any) {
+      const el = event.target;
+      fabric.loadSVGFromURL(el.src, (objects, options) => {
+        const image = fabric.util.groupSVGElements(objects, options);
+        image.set({
+          width : 200,
+          height : 100,
+          left: 10,
+          top: 10,
+          angle: 0,
+          padding: 10,
+          cornerSize: 10,
+          rotatingPointOffset:0,
+        });
+        this.extend(image, this.randomId());
+        this.canvas.add(image.setControlsVisibility({
+          mt: false, // middle top disable
+          mb: false, // midle bottom
+          ml: false, // middle left
+          mr: false, // I think you get it
+          tl:true,
+          bl:false,
+          tr:false,
+          br:false,
+          mtr:false,
+        }));
+        this.selectItemAfterAdded(image);
+      });
+    }
+
  /*------------------------Block Add figure------------------------*/
   addFigure(figure: any) {
     let add: any;
     switch (figure) {
       case 'rectangle':
         add = new fabric.Rect({
-          width: 1000, height: 20, left: 10, top: 10, angle: 0,rotatingPointOffset:0,
+          width: 500, height: 5, left: 10, top: 10, angle: 0,rotatingPointOffset:0,cornerSize:10,
           fill: '#D3D3D3'
         });
         break;
@@ -157,21 +195,20 @@ export class FabricjsEditorComponent implements AfterViewInit {
         break;
     }
     this.extend(add, this.randomId());
-    this.canvas.add(add);
+    this.canvas.add(add.setControlsVisibility({
+      mt: false, // middle top disable
+      mb: false, // midle bottom
+      ml: true, // middle left
+      mr: true, // I think you get it
+      tl:false,
+      bl:false,
+      tr:false,
+      br:false,
+      mtr:false,
+    }));
     this.selectItemAfterAdded(add);
   }
-      /*------------------------Block changeWallSize------------------------*/
-      changeWallSize(figure: any) {
-        switch (figure) {
-          case 'rectangle':
-          var  add = new fabric.Rect({
-              width: 1000, height: 20, left: 10, top: 10, angle: 0, hasControls : false,hasBorders:false,
-              fill: '#D3D3D3'
-            });
-            add.scaleToWidth(this.sizeWall.width)
-            add.scaleToHeight(this.sizeWall.height);
-    }
-    }
+
  /*------------------------Block cleanSelect------------------------*/
   cleanSelect() {
     this.canvas.discardActiveObject().renderAll();
@@ -203,93 +240,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     return Math.floor(Math.random() * 999999) + 1;
   }
 
-  /*------------------------Global actions for element------------------------*/
-
-  getActiveStyle(styleName:any, object:any) {
-    object = object || this.canvas.getActiveObject();
-    if (!object) { return ''; }
-
-    if (object.getSelectionStyles && object.isEditing) {
-      return (object.getSelectionStyles()[styleName] || '');
-    } else {
-      return (object[styleName] || '');
-    }
-  }
-
-  setActiveStyle(styleName: any, value: string | number, object: fabric.IText) {
-    object = object || this.canvas.getActiveObject() as fabric.IText;
-    if (!object) { return; }
-
-    if (object.setSelectionStyles && object.isEditing) {
-      const style:any = {};
-      style[styleName] = value;
-
-      if (typeof value === 'string') {
-        if (value.includes('underline')) {
-          object.setSelectionStyles({underline: true});
-        } else {
-          object.setSelectionStyles({underline: false});
-        }
-
-        if (value.includes('overline')) {
-          object.setSelectionStyles({overline: true});
-        } else {
-          object.setSelectionStyles({overline: false});
-        }
-
-        if (value.includes('line-through')) {
-          object.setSelectionStyles({linethrough: true});
-        } else {
-          object.setSelectionStyles({linethrough: false});
-        }
-      }
-
-      object.setSelectionStyles(style);
-      object.setCoords();
-
-    } else {
-      if (typeof value === 'string') {
-        if (value.includes('underline')) {
-        object.set('underline', true);
-        } else {
-          object.set('underline', false);
-        }
-
-        if (value.includes('overline')) {
-          object.set('overline', true);
-        } else {
-          object.set('overline', false);
-        }
-
-        if (value.includes('line-through')) {
-          object.set('linethrough', true);
-        } else {
-          object.set('linethrough', false);
-        }
-      }
-
-      object.set(styleName, value);
-    }
-
-    object.setCoords();
-    this.canvas.renderAll();
-  }
-
-
-  getActiveProp(name: string) {
-    const object:any = this.canvas.getActiveObject();
-    if (!object) { return ''; }
-
-    return object[name] || '';
-  }
-
-  setActiveProp(name: any, value: null) {
-    const object = this.canvas.getActiveObject();
-    if (!object) { return; }
-    object.set(name, value).setCoords();
-    this.canvas.renderAll();
-  }
-
   clone() {
     const activeObject = this.canvas.getActiveObject();
     const activeGroup = this.canvas.getActiveObjects();
@@ -305,9 +255,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
           break;
         case 'triangle':
           clone = new fabric.Triangle(activeObject.toObject());
-          break;
-        case 'i-text':
-          clone = new fabric.IText('', activeObject.toObject());
           break;
         case 'image':
           clone = fabric.util.object.clone(activeObject);
@@ -335,15 +282,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
       return complete;
     };
   }
-
-  getOpacity() {
-    this.props.opacity != this.getActiveStyle('opacity', null) * 100;
-  }
-
-  getFill() {
-    this.props.fill = this.getActiveStyle('fill', null);
-  }
-
   /****************************Block removeSelected********************** */
   removeSelected() {
     const activeObject = this.canvas.getActiveObject();
