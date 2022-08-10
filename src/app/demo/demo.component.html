@@ -105,51 +105,29 @@
     </mat-drawer>
   
     <mat-drawer-content>
-
+      <div class="row">
+        <div class="col-xl-12">
+            <br/>
+            <div class="card">
+                <div class="card-header">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="rasterizeJSON()">
+                        <i class="fa fa-refresh" aria-hidden="true"></i> Save 
+                      </button>
+                        <button  type="button" class="btn btn-danger" (click)="confirmClear();">
+                            <i class="fa fa-ban" aria-hidden="true"></i> Clean
+                        </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!canvas.selected"
+                            (click)="removeSelected();">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                            </div>
+                </div>
+            </div>
+        </div>
         <div class="col-xl-6">
             <app-lib #canvas ></app-lib>
             </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <br/>
-                    <div class="card">
-                        <div class="card-header">
-                            <button type="button" class="btn btn-primary btn-sm" (click)="rasterizeJSON()">
-                                <i class="fa fa-refresh" aria-hidden="true"></i> Save </button>
-                                <button  data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-danger" (click)="confirmClear();">
-                                    <i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
-                                        <div class="card">
-                                            <div class="card-header">Options</div>
-                                            <div class="card-body text-center">
-                                                <div class="btn-group" role="group" aria-label="...">
-                                                    <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!canvas.selected"
-                                                        (click)="removeSelected();">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-
-                                                    <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
-                                                        (click)="sendToBack();">
-                                                        <i class="fa fa-level-down" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
-                                                        (click)="bringToFront();">
-                                                        <i class="fa fa-level-up" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected || canvas.selected.type == 'group'"
-                                                        (click)="clone();">
-                                                        <i class="fa fa-clone" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" [disabled]="!canvas.selected"
-                                                        (click)="cleanSelect()">
-                                                        <i class="fa fa-remove" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                        </div>
-                    </div>
-                </div>
+            
                 
     </mat-drawer-content>
   </mat-drawer-container>
