@@ -1,4 +1,3 @@
-import { ZoomComponent } from './zoom/zoom.component';
 import { AssetPipe } from './pipes/asset.pipe';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialExampleModule } from './material.module';
 import { SafePipe } from './pipes/safe.pipe';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
@@ -28,7 +28,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DemoComponent,
     SafePipe,
     AssetPipe,
-    ZoomComponent,
     PreviewFurnitureComponent,
     FabricjsEditorComponent,
   ],
@@ -46,12 +45,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
+    ColorPickerModule,
     MaterialExampleModule,
     HttpClientModule,
+    FontAwesomeModule,
     MatNativeDateModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    FontAwesomeModule,
     AppRoutingModule,
   ],
   providers: [],

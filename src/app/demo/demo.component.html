@@ -43,6 +43,26 @@
                   </div>
                 </div>
               </div>
+              <div class="card" *ngIf="!canvas.selected">
+        <div class="card-header">Canvas</div>
+        <div class="card-body">
+          <div class="custom-item" *ngIf="!canvas.props.canvasImage">
+            <div class="custom-item-title">Background Color</div>
+            <div class="custom-item-body">
+              <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="canvas.props.canvasFill"
+                [style.background]="canvas.props.canvasFill" [value]="canvas.props.canvasFill"
+                (colorPickerChange)="setCanvasFill()">
+            </div>
+          </div>
+          <div class="custom-item">
+            <div class="custom-item-title">Background Image (url)</div>
+            <div class="custom-item-body">
+              <input type="text" class="form-control" placeholder="http://example.jpg"
+                [(ngModel)]="canvas.props.canvasImage" (keyup)="setCanvasImage()">
+            </div>
+          </div>
+        </div>
+      </div>
             </mat-list>
           </mat-expansion-panel>
               <br>

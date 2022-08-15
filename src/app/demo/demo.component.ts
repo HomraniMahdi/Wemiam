@@ -52,6 +52,13 @@ export class DemoComponent implements OnInit {
     this.canvas.getImgPolaroidTable(event);
   }
 
+  public setCanvasImage() {
+    this.canvas.setCanvasImage();
+  }
+  
+  public setCanvasFill() {
+    this.canvas.setCanvasFill();
+  }
   public rasterizeJSON() {
     this.canvas.rasterizeJSON();
   }

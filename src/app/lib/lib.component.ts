@@ -21,7 +21,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   private canvas: fabric.Canvas;
   public props = {
     canvasFill: '#ffffff',
-    canvasImage: "",
+    canvasImage: "https://free-3dtextureshd.com/wp-content/uploads/2019/05/WOOD-FLOORS-Parquet-Textures-ARCHITECTURE-parquet-flooring-texture-seamless-BPR-material-High-Resolution-Free-Download-substances-4k-full-864x864.jpg",
     id: null,
     opacity: null,
     fill: null,
@@ -51,7 +51,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       hoverCursor: 'pointer',
 
     });
-
+        
 
     this.canvas.on({
       'object:moving': (e) => { },
@@ -81,7 +81,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
-    
+    this.setCanvasImage();
     // get references to the html canvas element & its context
     this.canvas.on('mouse:down', (e) => {
       const canvasElement: any = document.getElementById('canvas');
@@ -223,6 +223,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
     if (!this.props.canvasImage) {
       this.canvas.backgroundColor = this.props.canvasFill;
       this.canvas.renderAll();
+    }
+  }
+
+  setCanvasImage() {
+    const self = this;
+    if (this.props.canvasImage) {
+      this.canvas.setBackgroundColor(new fabric.Pattern({ source: this.props.canvasImage, repeat: 'repeat' }), () => {
+        self.props.canvasFill = '';
+        self.canvas.renderAll();
+      });
     }
   }
 
