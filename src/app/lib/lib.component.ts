@@ -21,7 +21,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   private canvas: fabric.Canvas;
   public props = {
     canvasFill: '#ffffff',
-    canvasImage: "https://free-3dtextureshd.com/wp-content/uploads/2019/05/WOOD-FLOORS-Parquet-Textures-ARCHITECTURE-parquet-flooring-texture-seamless-BPR-material-High-Resolution-Free-Download-substances-4k-full-864x864.jpg",
+    canvasImage: "https://images.assetsdelivery.com/compings_v2/ivo13/ivo131805/ivo13180500193.jpg",
     id: null,
     opacity: null,
     fill: null,
@@ -173,19 +173,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
     switch (figure) {
       case 'rectangle':
         add = new fabric.Rect({
-          width: 500, height: 5, left: 10, top: 10, angle: 0,rotatingPointOffset:0,cornerSize:10,
+          width: 300, height: 5, left: 5, top: 10, angle: 0,rotatingPointOffset:0,cornerSize:10,
           fill: '#D3D3D3'
-        });
-        break;
-      case 'square':
-        add = new fabric.Rect({
-          width: 100, height: 100, left: 10, top: 10, angle: 0,rotatingPointOffset:0,
-          fill: '#D3D3D3'
-        });
-        break;
-      case 'triangle':
-        add = new fabric.Triangle({
-          width: 100, height: 100, left: 10, top: 10,rotatingPointOffset:0, fill: '#D3D3D3'
         });
         break;
       case 'circle':
@@ -200,6 +189,36 @@ export class FabricjsEditorComponent implements AfterViewInit {
       mb: false, // midle bottom
       ml: true, // middle left
       mr: true, // I think you get it
+      tl:false,
+      bl:false,
+      tr:false,
+      br:false,
+      mtr:false,
+    }));
+    this.selectItemAfterAdded(add);
+  }
+
+  addFigureVertical(figure: any) {
+    let add: any;
+    switch (figure) {
+      case 'rectangle':
+        add = new fabric.Rect({
+          width: 5, height: 250, left: 5, top: 10, angle: 0,rotatingPointOffset:0,cornerSize:10,
+          fill: '#D3D3D3'
+        });
+        break;
+      case 'circle':
+        add = new fabric.Circle({
+          radius: 50, left: 10, top: 10,rotatingPointOffset:0, fill: '#D3D3D3'
+        });
+        break;
+    }
+    this.extend(add, this.randomId());
+    this.canvas.add(add.setControlsVisibility({
+      mt: true, // middle top disable
+      mb: true, // midle bottom
+      ml: false, // middle left
+      mr: false, // I think you get it
       tl:false,
       bl:false,
       tr:false,
@@ -308,61 +327,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
       });
     }
   }
-  /****************************Block bringToFront********************** */
-  bringToFront() {
-    const activeObject = this.canvas.getActiveObject();
-    const activeGroup = this.canvas.getActiveObjects();
-
-    if (activeObject) {
-      activeObject.bringToFront();
-      activeObject.opacity = 1;
-    } else if (activeGroup) {
-      this.canvas.discardActiveObject();
-      activeGroup.forEach((object) => {
-        object.bringToFront();
-      });
-    }
-  }
-  /****************************Block sendToBack********************** */
-  sendToBack() {
-    const activeObject = this.canvas.getActiveObject();
-    const activeGroup = this.canvas.getActiveObjects();
-
-    if (activeObject) {
-      this.canvas.sendToBack(activeObject);
-      activeObject.sendToBack();
-      activeObject.opacity = 1;
-    } else if (activeGroup) {
-      this.canvas.discardActiveObject();
-      activeGroup.forEach((object) => {
-        object.sendToBack();
-      });
-    }
-  }
   /****************************Block confirmClear********************** */
   confirmClear() {
     if (confirm('Are you sure?')) {
       this.canvas.clear();
     }
   }
-
-  /****************************Block saveCanvasToJSON********************** */
-  saveCanvasToJSON() {
-    const json = JSON.stringify(this.canvas);
-    localStorage.setItem('Kanvas', json);
-    console.log('json');
-    console.log(json);
-
-  }
-
   /****************************Block rasterizeJSON********************** */
   rasterizeJSON() {
     this.json = JSON.stringify(this.canvas, null, 2);
   }
-
-  onZoom(value: number) {
-    this.app.zoom = value;
-    this.app.performOperation.next('ZOOM');
-  }
-
 }

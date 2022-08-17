@@ -79,7 +79,14 @@
                 <img class="example-box" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/table2.svg">
                 <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/table3.svg">
                 <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/table4.svg">
-            </div>
+                <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/table5.svg">
+                <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/table6.svg">
+                <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/table7.svg">
+                <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/office1.svg">
+                <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/office2.svg">
+                <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/office3.svg">
+                <img class="images-item" class="images-item" (click)="getImgPolaroidTable($event)" src="../assets/img/Tables/office4.svg">
+              </div>
           </mat-list>
         </mat-expansion-panel>
             <br>
@@ -92,15 +99,18 @@
 
             <div class="card-body text-center max-height">
                 <div class="btn-group btn-group-vertical" role="group" aria-label="...">
-                    <button type="button" class="btn btn-primary" (click)="addFigure('rectangle');">Wall</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigure('rectangle');">Wall Horizontal</button>
+                    <button type="button" class="btn btn-primary" (click)="addFigureVertical('rectangle');">Wall Vertical</button>
                     <button type="button" class="btn btn-primary" (click)="addFigure('circle');">RoundWall</button>
+                    <img class="example-box" class="images-item" (click)="getImgPolaroidDecoration($event)" src="../assets/img/Porte/porte.svg" > <p>Porte</p>
+                   
                 </div>
               </div>
     </mat-expansion-panel>
     <br>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <img class="img-fluid" src="assets/img/Icon/Decoration.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo Tables">
+        <img class="img-fluid" src="assets/img/Icon/Decoration.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo Decoration">
             <h2 style="margin-top:20px ; margin-left:20px">Decoration</h2>
       </mat-expansion-panel-header>
       <mat-list>

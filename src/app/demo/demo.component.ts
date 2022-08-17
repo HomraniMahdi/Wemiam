@@ -39,11 +39,9 @@ export class DemoComponent implements OnInit {
   public addFigure(figure: any) {
     this.canvas.addFigure(figure);
   }
-  
-  public saveCanvasToJSON() {
-    this.canvas.saveCanvasToJSON();
+  public addFigureVertical(figure: any) {
+    this.canvas.addFigureVertical(figure);
   }
-  
   public getImgPolaroidDecoration(event:any) {
     this.canvas.getImgPolaroidDecoration(event);
   }
@@ -67,13 +65,6 @@ export class DemoComponent implements OnInit {
   }
   public removeSelected() {
     this.canvas.removeSelected();
-  }
-  public sendToBack() {
-    this.canvas.sendToBack();
-  }
-  
-  public bringToFront() {
-    this.canvas.bringToFront();
   }
   public clone() {
     this.canvas.clone();
