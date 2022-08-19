@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { fabric } from 'fabric';
-import { AppService } from '../Service/app.service';
+import { BuildingService } from '../Service/BuildingService';
+
 
 
 @Component({
@@ -42,7 +43,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   public figureEditor = false;
   public selected: any;
 
-  constructor(public app: AppService) { }
+  constructor( private floorJson : BuildingService) { }
 
   ngAfterViewInit(): void {
 
@@ -336,5 +337,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   /****************************Block rasterizeJSON********************** */
   rasterizeJSON() {
     this.json = JSON.stringify(this.canvas, null, 2);
+    console.log(this.json)
+   this.floorJson.addFloor(JSON.parse( this.json)).subscribe(res => console.log(res));
   }
 }

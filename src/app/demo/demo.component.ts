@@ -1,7 +1,5 @@
+import { BuildingService } from './../Service/BuildingService';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FURNISHINGS } from '../models/furnishings';
-import { MatDialog } from '@angular/material/dialog';
-import { AppService } from '../Service/app.service';
 import { FabricjsEditorComponent } from '../lib/lib.component';
 import { MapConfig } from '../models/configuration';
 
@@ -26,14 +24,9 @@ export class DemoComponent implements OnInit {
   public floorMapsDict: { [id: number]: MapConfig } = {};
 
   @ViewChild('canvas', { static: false }) canvas: FabricjsEditorComponent ;
-  constructor(public app: AppService) { }
+  constructor(json : BuildingService) { }
 
   ngOnInit(): void {
-  }
-
-  insert(object: any, type: string) {
-    if (this.app.roomEdit) { return; }
-    this.app.insertObject.next({ type, object });
   }
 
   public addFigure(figure: any) {

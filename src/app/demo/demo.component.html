@@ -143,14 +143,21 @@
                     <button type="button" class="btn btn-primary btn-sm" (click)="rasterizeJSON()">
                         <i class="fa fa-refresh" aria-hidden="true"></i> Save 
                       </button>
-                        <button  type="button" class="btn btn-danger" (click)="confirmClear();">
+                        <button style="margin: 10px" type="button" class="btn btn-danger" (click)="confirmClear();">
                             <i class="fa fa-ban" aria-hidden="true"></i> Clean
                         </button>
-                            <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!canvas.selected"
+                            <button style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!canvas.selected"
                             (click)="removeSelected();">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
-                            </div>
+                            
+                            <select  style="width: 200px;" class="form-control mobileSelect" name="happy" >
+                              <option  value="HAPPY_HOUR">HAPPY_HOUR </option>
+                              <option value="HAPPY_DAYS">HAPPY_DAYS</option>
+                              <option value="BLACK_FRIDAY">BLACK_FRIDAY</option>
+                              <option value="PROMOTION">PROMOTION</option>
+                           </select>
+                      </div>
                 </div>
             </div>
         </div>
