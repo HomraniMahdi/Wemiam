@@ -337,7 +337,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   /****************************Block rasterizeJSON********************** */
   rasterizeJSON() {
     this.json = JSON.stringify(this.canvas, null, 2);
-    console.log(this.json)
-   this.floorJson.addFloor(JSON.parse( this.json)).subscribe(res => console.log(res));
+    console.log({content :JSON.parse( this.json)});
+   this.floorJson.addFloor({content :JSON.parse( this.json)}).subscribe(res => console.log(res));
   }
 }

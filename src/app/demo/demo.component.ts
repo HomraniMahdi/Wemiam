@@ -1,7 +1,6 @@
 import { BuildingService } from './../Service/BuildingService';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FabricjsEditorComponent } from '../lib/lib.component';
-import { MapConfig } from '../models/configuration';
 
 
 @Component({
@@ -18,10 +17,6 @@ export class DemoComponent implements OnInit {
     asideMarginSpace: true,
     floorsToolbar: true
 };
-
-  public floorMaps: MapConfig[];
-  public currentFloorMap: MapConfig;
-  public floorMapsDict: { [id: number]: MapConfig } = {};
 
   @ViewChild('canvas', { static: false }) canvas: FabricjsEditorComponent ;
   constructor(json : BuildingService) { }
