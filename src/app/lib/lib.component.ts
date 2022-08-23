@@ -1,10 +1,10 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import UUID from "uuidjs";
 import { fabric } from 'fabric';
 import { BuildingService } from '../Service/BuildingService';
 
-
-
+var ID: string = UUID.generate();
 @Component({
   selector: 'app-lib',
   templateUrl: './lib.component.html',
@@ -15,8 +15,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
   curvedBlock: FormGroup;
   layout: fabric.Group;
   view: fabric.Canvas;
-  zoom = 100;
-
   @ViewChild('htmlCanvas') htmlCanvas: ElementRef;
 
   private canvas: fabric.Canvas;
@@ -105,9 +103,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
   }
-
   /*------------------------Block Add Decoration------------------------*/
   getImgPolaroidDecoration(event: any) {
+    let id = this.Id();
     const el = event.target;
     fabric.loadSVGFromURL(el.src, (objects, options) => {
       const image = fabric.util.groupSVGElements(objects, options);
@@ -121,7 +119,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
         cornerSize: 10,
         rotatingPointOffset:0,
       });
-      this.extend(image, this.randomId());
+      this.extend(image,id);
+      console.log("l'identifiant de cette élément c'est "+id);
       this.canvas.add(image.setControlsVisibility({
         mt: false, // middle top disable
         mb: false, // midle bottom
@@ -139,6 +138,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   
     /*------------------------Block Add Table------------------------*/
     getImgPolaroidTable(event: any) {
+      let id = this.Id();
       const el = event.target;
       fabric.loadSVGFromURL(el.src, (objects, options) => {
         const image = fabric.util.groupSVGElements(objects, options);
@@ -152,7 +152,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
           cornerSize: 10,
           rotatingPointOffset:0,
         });
-        this.extend(image, this.randomId());
+        this.extend(image,id);
+        console.log("l'identifiant de cette élément c'est "+id);
         this.canvas.add(image.setControlsVisibility({
           mt: false, // middle top disable
           mb: false, // midle bottom
@@ -170,6 +171,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
  /*------------------------Block Add figure------------------------*/
   addFigure(figure: any) {
+    let id = this.Id();
     let add: any;
     switch (figure) {
       case 'rectangle':
@@ -184,7 +186,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
         });
         break;
     }
-    this.extend(add, this.randomId());
+    this.extend(add,id);
+    console.log("l'identifiant de cette élément c'est "+id);
     this.canvas.add(add.setControlsVisibility({
       mt: false, // middle top disable
       mb: false, // midle bottom
@@ -200,6 +203,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   }
 
   addFigureVertical(figure: any) {
+    let id = this.Id();
     let add: any;
     switch (figure) {
       case 'rectangle':
@@ -214,10 +218,37 @@ export class FabricjsEditorComponent implements AfterViewInit {
         });
         break;
     }
-    this.extend(add, this.randomId());
+    this.extend(add,id);
+    console.log("l'identifiant de cette élément c'est "+id);
     this.canvas.add(add.setControlsVisibility({
       mt: true, // middle top disable
       mb: true, // midle bottom
+      ml: false, // middle left
+      mr: false, // I think you get it
+      tl:false,
+      bl:false,
+      tr:false,
+      br:false,
+      mtr:false,
+    }));
+    this.selectItemAfterAdded(add);
+  }
+
+  addPostion(figure: any) {
+    let id = this.Id();
+    let add: any;
+    switch (figure) {
+      case 'circle':
+        add = new fabric.Circle({
+          radius: 20, left: 10, top: 10,rotatingPointOffset:0, fill: '#D3D3D3'
+        });
+        break;
+    }
+    this.extend(add,id);
+    console.log("l'identifiant de cette élément c'est "+id);
+    this.canvas.add(add.setControlsVisibility({
+      mt: false, // middle top disable
+      mb: false, // midle bottom
       ml: false, // middle left
       mr: false, // I think you get it
       tl:false,
@@ -268,6 +299,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   randomId() {
     return Math.floor(Math.random() * 999999) + 1;
+  }
+
+  Id() {
+    return UUID.generate();
   }
 
   clone() {
@@ -339,5 +374,13 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.json = JSON.stringify(this.canvas, null, 2);
     console.log({content :JSON.parse( this.json)});
    this.floorJson.addFloor({content :JSON.parse( this.json)}).subscribe(res => console.log(res));
+  }
+  
+  function(uuid4:any){
+    return {
+      codeThatNeedsUUID: function() {
+        return "Look ma! I'm unique: " + uuid4.generate();
+      }
+    };
   }
 }

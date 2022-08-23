@@ -10,6 +10,7 @@ import { FabricjsEditorComponent } from '../lib/lib.component';
 })
 export class DemoComponent implements OnInit {
   public resultImage: any;
+  public FloorLevel : number;
   public visible = {
     objectsToolbar: true,
     adminToolbar: true,
@@ -29,6 +30,9 @@ export class DemoComponent implements OnInit {
   }
   public addFigureVertical(figure: any) {
     this.canvas.addFigureVertical(figure);
+  }
+  public addPostion(figure: any) {
+    this.canvas.addPostion(figure);
   }
   public getImgPolaroidDecoration(event:any) {
     this.canvas.getImgPolaroidDecoration(event);

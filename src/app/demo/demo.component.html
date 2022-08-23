@@ -131,6 +131,13 @@
           </div>
       </mat-list>
     </mat-expansion-panel>
+    <br>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <img class="img-fluid" src="assets/img/Icon/position.png"width="50" height="10" style="margin-bottom: 10px;" alt="Logo position">
+          <button style="margin-left: 50px;" type="button" class="btn btn-light" (click)="addPostion('circle');">Position</button>
+        </mat-expansion-panel-header>
+</mat-expansion-panel>
       </mat-accordion>
     </mat-drawer>
   
@@ -150,7 +157,6 @@
                             (click)="removeSelected();">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
-                            
                             <select  style="width: 200px;" class="form-control mobileSelect" name="happy" >
                               <option  value="HAPPY_HOUR">HAPPY_HOUR </option>
                               <option value="HAPPY_DAYS">HAPPY_DAYS</option>
