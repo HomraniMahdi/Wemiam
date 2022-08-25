@@ -1,5 +1,7 @@
-import { BuildingService } from './../Service/BuildingService';
+import { FloorService } from './../Service/FloorService';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Floor } from 'src/Models/Floor';
 import { FabricjsEditorComponent } from '../lib/lib.component';
 
 
@@ -20,9 +22,16 @@ export class DemoComponent implements OnInit {
 };
 
   @ViewChild('canvas', { static: false }) canvas: FabricjsEditorComponent ;
-  constructor(json : BuildingService) { }
+  constructor(private floorService: FloorService) { }
 
+
+  selecteFloorId:any;
+  floors: Floor[] = [];
   ngOnInit(): void {
+    this.floorService.GetAllFloors().subscribe(floors => {
+      this.floors = floors.data
+      console.log(floors)
+    })
   }
 
   public addFigure(figure: any) {
@@ -68,5 +77,14 @@ export class DemoComponent implements OnInit {
   public changeSize() {
     this.canvas.changeSize();
   }
-  
+
+  public onSelectFloor(event: any) {
+    this.selecteFloorId = event.target.value;
+    console.log(event.target.value);
+    this.floorService.getFloorsById(this.selecteFloorId).subscribe(floor=>this.canvas.loadCanvasFromJSON(floor.floor_data));
+  }
+
+  public saveCanvasToJSON(){
+    this.canvas.saveCanvasToJSON();
+  }
 }

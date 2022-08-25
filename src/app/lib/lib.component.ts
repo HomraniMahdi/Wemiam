@@ -2,7 +2,9 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import UUID from "uuidjs";
 import { fabric } from 'fabric';
-import { BuildingService } from '../Service/BuildingService';
+import { FloorService } from '../Service/FloorService';
+import { Floor } from 'src/Models/Floor';
+
 
 var ID: string = UUID.generate();
 @Component({
@@ -40,11 +42,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
   public json: any;
   public figureEditor = false;
   public selected: any;
-
-  constructor( private floorJson : BuildingService) { }
-
+  floors: Floor[] = [];
+  floor: Floor 
+  constructor( private floorService : FloorService) { }
+  selectedfloor_id = '0879b356-ad5f-45b8-baf7-d80c77515dab';
+  selectedId=this.floorService.getFloorsById(this.selectedfloor_id);
   ngAfterViewInit(): void {
-
     // setup front side canvas
     this.canvas = new fabric.Canvas(this.htmlCanvas.nativeElement, {
       hoverCursor: 'pointer',
@@ -212,7 +215,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           fill: '#D3D3D3'
         });
         break;
-      case 'circle':
+      case 'circleWall':
         add = new fabric.Circle({
           radius: 50, left: 10, top: 10,rotatingPointOffset:0, fill: '#D3D3D3'
         });
@@ -238,7 +241,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     let id = this.Id();
     let add: any;
     switch (figure) {
-      case 'circle':
+      case 'Emplacement':
         add = new fabric.Circle({
           radius: 20, left: 10, top: 10,rotatingPointOffset:0, fill: '#D3D3D3'
         });
@@ -295,10 +298,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         });
       };
     })(obj.toObject);
-  }
-
-  randomId() {
-    return Math.floor(Math.random() * 999999) + 1;
   }
 
   Id() {
@@ -373,14 +372,35 @@ export class FabricjsEditorComponent implements AfterViewInit {
   rasterizeJSON() {
     this.json = JSON.stringify(this.canvas, null, 2);
     console.log({content :JSON.parse( this.json)});
-   this.floorJson.addFloor({content :JSON.parse( this.json)}).subscribe(res => console.log(res));
+   this.floorService.updateFloor(this.selectedfloor_id,{floor_data :JSON.parse( this.json)}).subscribe(res => console.log(res));
   }
-  
-  function(uuid4:any){
-    return {
-      codeThatNeedsUUID: function() {
-        return "Look ma! I'm unique: " + uuid4.generate();
-      }
-    };
+  saveCanvasToJSON() {
+    const json = JSON.stringify(this.canvas);
+    localStorage.setItem('Kanvas', json);
+    console.log('json');
+    console.log(json);
   }
-}
+
+
+  loadCanvasFromJSON(floor :any) {
+    const CANVAS = floor;
+    console.log('CANVAS');
+    console.log(CANVAS);
+
+    // and load everything from the same json
+    this.canvas.loadFromJSON(CANVAS, () => {
+      console.log('CANVAS untar');
+      console.log(CANVAS);
+
+      // making sure to render canvas at the end
+      this.canvas.renderAll();
+
+      // and checking if object's "name" is preserved
+      console.log('this.canvas.item(0).name');
+      console.log(this.canvas);
+    });
+
+  }
+
+
+  }

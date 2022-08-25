@@ -24,7 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [
     AppComponent,
     DemoComponent,
-    FabricjsEditorComponent,
+    FabricjsEditorComponent
   ],
   imports: [
     BrowserModule,
