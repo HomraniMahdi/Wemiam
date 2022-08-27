@@ -38,6 +38,11 @@ import { Floor } from "src/Models/Floor";
       const headers = new HttpHeaders().set("session", sessionid);
       return this._http.post("http://localhost:3000/floors",floor,{ headers })
     }
-  
+      //Delete  Building
+      public deleteFloor(idFloor: string){
+        let sessionid = '02164c02-1553-47af-88ae-cb21118695f1';
+        const headers = new HttpHeaders().set("session", sessionid);
+        return this._http.delete("http://localhost:3000/floors/"+idFloor,{ headers })
+      }
   }
   
