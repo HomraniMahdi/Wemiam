@@ -4,6 +4,9 @@ import { BuildingService } from './../Service/BuildingService';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Floor } from 'src/Models/Floor';
+import { DemoComponent } from '../demo/demo.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-floor',
@@ -12,7 +15,7 @@ import { Floor } from 'src/Models/Floor';
 })
 export class NewFloorComponent implements OnInit {
 
-  constructor(private BuildingService: BuildingService, private floorService:FloorService) { }
+  constructor(private matDialog:MatDialog,private BuildingService: BuildingService, private floorService:FloorService,private router : Router) { }
   idBuilding: any;
   floor: Floor = {
     floor_id: '',
@@ -44,6 +47,7 @@ export class NewFloorComponent implements OnInit {
       ,(error) => {
         Swal.fire('Error', 'Error in adding floor', 'error');
       })
-  
+      this.matDialog.closeAll
     }
+
 }

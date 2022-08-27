@@ -1,8 +1,9 @@
 import { FloorService } from './../Service/FloorService';
-
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Floor } from 'src/Models/Floor';
 import { FabricjsEditorComponent } from '../lib/lib.component';
+import { NewFloorComponent } from '../new-floor/new-floor.component';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class DemoComponent implements OnInit {
 };
 
   @ViewChild('canvas', { static: false }) canvas: FabricjsEditorComponent ;
-  constructor(private floorService: FloorService) { }
+  constructor(private matDialog:MatDialog,private floorService: FloorService) { }
 
 
   selecteFloorId:any;
@@ -86,5 +87,8 @@ export class DemoComponent implements OnInit {
 
   public saveCanvasToJSON(){
     this.canvas.saveCanvasToJSON();
+  }
+  public Addfloor(){
+    this.matDialog.open(NewFloorComponent);
   }
 }

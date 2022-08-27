@@ -157,10 +157,15 @@
                             (click)="removeSelected();">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
-
-                            <select style="width:50px; margin: 10px" (change)="onSelectFloor($event)">
+                          
+                            <select style="text-align: center;box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;border-radius: 50px;font-size: 14px;;height: 35px;width:60px; margin: 10px" (change)="onSelectFloor($event)">
                                 <option [value]="floor.floor_id" *ngFor="let floor of floors">{{floor.floor_level}}
-                             </option> </select>                          
+                             </option> </select>         
+                             
+                             <button style="margin: 5px; margin-left: 1000px;" data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-dark"
+                             (click)="Addfloor();">
+                             <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                             </button>
                       </div>
                 </div>
             </div>

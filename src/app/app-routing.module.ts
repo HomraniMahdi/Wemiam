@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
   const routes: Routes = [
-    { path: '', component: DemoComponent },
+    { path: '**', component: DemoComponent },
     { path: 'add-floor', component: NewFloorComponent },
   
   ];
