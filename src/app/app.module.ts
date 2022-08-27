@@ -19,12 +19,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialExampleModule } from './material.module';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NewFloorComponent } from './new-floor/new-floor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DemoComponent,
-    FabricjsEditorComponent
+    FabricjsEditorComponent,
+    NewFloorComponent
   ],
   imports: [
     BrowserModule,

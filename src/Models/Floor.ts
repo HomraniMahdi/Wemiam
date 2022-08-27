@@ -1,4 +1,3 @@
-
 export class Floor {
     floor_id:string;  
     building_id:string; 

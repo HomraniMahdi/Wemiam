@@ -25,14 +25,19 @@ import { Floor } from "src/Models/Floor";
     public Building() {
       return this._http.get(`http://localhost:3000/floors/data`);
     }
-  
-    //add new Building
+    
+    //updateFloor
     public updateFloor(idFloor : any , floor:any) {
       let sessionid = '02164c02-1553-47af-88ae-cb21118695f1';
       const headers = new HttpHeaders().set("session", sessionid);
       return this._http.put(`http://localhost:3000/floors/`+idFloor, floor,{ headers });
     }
-
-
+    //add new Building
+    public addFloor(floor :Floor){
+      let sessionid = '02164c02-1553-47af-88ae-cb21118695f1';
+      const headers = new HttpHeaders().set("session", sessionid);
+      return this._http.post("http://localhost:3000/floors",floor,{ headers })
+    }
+  
   }
   

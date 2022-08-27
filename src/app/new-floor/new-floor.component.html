@@ -1,0 +1,15 @@
+
+<div class="container">
+    <div class="brand-logo"></div>
+    <div class="brand-title">Add Floor</div>
+    <div class="inputs">
+      <form action="" enctype="multipart/form-data" (ngSubmit)="addFloor()" #f="ngForm">
+        <select (change)="onSelectBuild($event)">
+            <option [value]="build.building_id" *ngFor="let build of buildings">{{build.building_id}}
+            </option> </select>
+      <label>Floor level</label>
+      <input type="number" placeholder="choose level of this"  [(ngModel)]="floor.floor_level" [ngModelOptions]="{standalone: true}"/>
+      <button type="submit">Save</button>
+    </form>
+    </div>
+  </div>
